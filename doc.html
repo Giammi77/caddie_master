@@ -84,16 +84,6 @@
   }
   .tab-active { background: #1a7a3a; color: white; }
   .tab-inactive { background: #e0e0e0; color: #666; }
-  .screenshot-placeholder {
-    background: #f0f2f5;
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    color: #999;
-    margin: 12px 0;
-    font-size: 0.85rem;
-  }
   code {
     background: #f0f2f5;
     padding: 2px 6px;
@@ -139,16 +129,6 @@
     flex: 1;
     padding-top: 4px;
   }
-  .priority-example {
-    display: flex;
-    gap: 8px;
-    margin: 8px 0;
-  }
-  .priority-bar {
-    height: 8px;
-    border-radius: 4px;
-    flex: 1;
-  }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -164,6 +144,23 @@
     background: #f8f9fa;
     font-weight: 600;
     color: #555;
+  }
+  .url-box {
+    background: #e8f5e9;
+    border: 2px solid #1a7a3a;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    margin: 16px 0;
+    font-size: 1.1rem;
+  }
+  .url-box a {
+    color: #1a7a3a;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .url-box a:hover {
+    text-decoration: underline;
   }
   .footer {
     text-align: center;
@@ -186,26 +183,53 @@
   <div class="section">
     <h2>Cos'e' Caddie Master</h2>
     <p>
-      Caddie Master e' un'app mobile standalone per gestire la preparazione delle attrezzature
+      Caddie Master e' un'app per gestire la preparazione delle attrezzature
       da golf (sacche su carrelli) prima di una gara. Il deposito e' organizzato per
       <strong>file numerate</strong>, e ogni giocatore ha la propria attrezzatura in una fila specifica.
     </p>
     <p>
-      L'app permette al caddie master di sapere, data una lista di partenze,
+      Data una lista di partenze, l'app dice al caddie master
       <strong>quali file aprire</strong> e <strong>quali attrezzature preparare</strong>,
       ottimizzando i viaggi al deposito.
     </p>
     <p>
-      <span class="badge badge-green">Offline</span>
+      <span class="badge badge-green">Funziona offline</span>
       <span class="badge badge-blue">Dati sul dispositivo</span>
-      <span class="badge badge-green">Nessun server</span>
+      <span class="badge badge-green">Nessun server necessario</span>
     </p>
+  </div>
+
+  <!-- INSTALLAZIONE -->
+  <div class="section">
+    <h2>Installazione</h2>
+
+    <h3>Da browser (Android e iPhone)</h3>
+    <p>Apri questo indirizzo dal browser del telefono:</p>
+    <div class="url-box">
+      <a href="https://giammi77.github.io/caddie_master" target="_blank">https://giammi77.github.io/caddie_master</a>
+    </div>
+    <p>Poi aggiungi l'app alla schermata Home:</p>
+    <ul>
+      <li><strong>Android</strong> (Chrome): menu &#x22EE; &rarr; "Aggiungi a schermata Home"</li>
+      <li><strong>iPhone</strong> (Safari): tasto condividi &#x2B06; &rarr; "Aggiungi a Home"</li>
+    </ul>
+    <p>L'app apparira' con la sua icona e funzionera' anche <strong>senza connessione internet</strong>
+    dopo il primo caricamento.</p>
+
+    <h3>Android (APK nativo)</h3>
+    <p>In alternativa, e' disponibile il file <code>CaddieMaster.apk</code> da installare direttamente:</p>
+    <ol>
+      <li>Trasferisci il file APK sul telefono (via email, Telegram, USB, ecc.)</li>
+      <li>Apri il file APK sul telefono</li>
+      <li>Se richiesto, abilita "Installa da fonti sconosciute" nelle impostazioni</li>
+      <li>Completa l'installazione</li>
+    </ol>
   </div>
 
   <!-- LE 4 SEZIONI -->
   <div class="section">
-    <h2>Le 4 sezioni</h2>
-    <p>L'app ha una barra di navigazione in basso con 4 tab:</p>
+    <h2>Le 4 sezioni dell'app</h2>
+    <p>La barra di navigazione in basso ha 4 tab:</p>
     <div class="tab-preview">
       <span class="tab-active">+ Importa</span>
       <span class="tab-inactive">&#x23F0; Gara</span>
@@ -225,7 +249,7 @@
       <div class="flow-number">1</div>
       <div class="flow-content">
         <strong>Inserisci i dati</strong><br>
-        Compila nome gara, data, e incolla il testo della lista partenze nella textarea.
+        Compila il nome della gara, la data, e incolla il testo della lista partenze nella textarea.
       </div>
     </div>
 
@@ -233,10 +257,10 @@
       <div class="flow-number">2</div>
       <div class="flow-content">
         <strong>Premi "Analizza"</strong><br>
-        L'app parsa il testo e confronta i nomi con l'anagrafica.
+        L'app legge il testo e confronta i nomi con l'anagrafica.
         Ogni giocatore viene segnato come:
         <span class="badge badge-green">Noto</span> (fila gia' assegnata) oppure
-        <span class="badge badge-orange">Nuovo</span> (non in anagrafica).
+        <span class="badge badge-orange">Nuovo</span> (non presente in anagrafica).
       </div>
     </div>
 
@@ -245,8 +269,8 @@
       <div class="flow-content">
         <strong>Assegna le file ai nuovi (opzionale)</strong><br>
         Per i giocatori nuovi puoi inserire il numero della fila.
-        Se non lo conosci, puoi lasciarlo vuoto: il giocatore verra' omesso
-        dalla preparazione attrezzature.
+        Se non lo conosci, puoi lasciarlo vuoto: il giocatore verra' semplicemente omesso
+        dalla preparazione attrezzature nella vista File.
       </div>
     </div>
 
@@ -255,7 +279,7 @@
       <div class="flow-content">
         <strong>Premi "Conferma e Salva"</strong><br>
         La gara viene salvata. I giocatori nuovi a cui hai assegnato una fila
-        vengono aggiunti automaticamente all'anagrafica.
+        vengono aggiunti automaticamente all'anagrafica per le gare future.
       </div>
     </div>
 
@@ -263,12 +287,12 @@
     <p>Il testo deve avere questo formato (campi separati da TAB):</p>
     <pre><code>08:36  1  COGNOME NOME 15  COGNOME NOME 17
 08:45  1  COGNOME NOME 12  COGNOME NOME 8  COGNOME NOME 17</code></pre>
-    <p>Dove: <code>ORARIO</code> <code>TEE</code> <code>GIOCATORE1</code> <code>GIOCATORE2</code> ...</p>
-    <p>Il numero dopo il nome e' l'handicap (viene ignorato). Le voci "Privacy" vengono saltate.</p>
+    <p>Ogni riga: <code>ORARIO</code> <code>TEE</code> <code>GIOCATORE1</code> <code>GIOCATORE2</code> ...</p>
+    <p>Il numero dopo il nome e' l'handicap e viene ignorato. Le voci "Privacy" vengono saltate automaticamente.</p>
 
     <h3>Gare precedenti</h3>
-    <p>Le gare gia' importate appaiono in cima alla pagina. Puoi selezionarle per rivederle
-    oppure eliminarle con il bottone <span class="badge badge-red">Elimina</span>.</p>
+    <p>Le gare gia' importate appaiono in cima alla pagina. Puoi selezionarne una per rivederla
+    oppure eliminarla con il bottone <span class="badge badge-red">Elimina</span>.</p>
   </div>
 
   <!-- 2. GARA -->
@@ -278,20 +302,20 @@
 
     <h3>Funzionalita'</h3>
     <ul>
-      <li>Ogni gruppo mostra orario e numero del tee</li>
+      <li>Ogni gruppo mostra orario e numero del tee di partenza</li>
       <li>Accanto a ogni giocatore c'e' il <span class="badge badge-green" style="background:#1a7a3a;color:white">N. fila</span></li>
       <li>I giocatori senza fila mostrano <span class="badge badge-orange">No fila</span></li>
-      <li><strong>Tap su un giocatore</strong>: evidenzia in verde tutti i giocatori della stessa fila, in tutte le partenze</li>
+      <li><strong>Tap su un giocatore</strong>: evidenzia in verde tutti i giocatori della stessa fila in tutte le partenze</li>
       <li>Tap di nuovo per deselezionare</li>
     </ul>
-    <p>Questa vista e' utile per capire rapidamente "chi parte con chi" e in quale fila si trovano.</p>
+    <p>Questa vista e' utile per capire rapidamente "chi parte con chi" e in quale fila si trovano le attrezzature.</p>
   </div>
 
   <!-- 3. FILE -->
   <div class="section">
     <h2>3. File Deposito</h2>
     <p>Questa e' la <strong>vista principale</strong> per il lavoro del caddie master.
-    Mostra tutte le file del deposito che devono essere aperte, ordinate per priorita'.</p>
+    Mostra tutte le file del deposito da aprire, ordinate per priorita'.</p>
 
     <h3>Ordinamento per priorita'</h3>
     <p>Le file sono ordinate in base all'orario della <strong>prima partenza</strong>:
@@ -305,29 +329,29 @@
       </tr>
       <tr>
         <td><div style="width:40px;height:8px;background:#c62828;border-radius:4px"></div></td>
-        <td><strong>Rosso</strong> - Urgente, prime file da preparare</td>
+        <td><strong>Rosso</strong> &mdash; Urgente, prime file da preparare</td>
       </tr>
       <tr>
         <td><div style="width:40px;height:8px;background:#f9a825;border-radius:4px"></div></td>
-        <td><strong>Giallo</strong> - Priorita' media</td>
+        <td><strong>Giallo</strong> &mdash; Priorita' media</td>
       </tr>
       <tr>
         <td><div style="width:40px;height:8px;background:#2e7d32;border-radius:4px"></div></td>
-        <td><strong>Verde</strong> - Puo' aspettare</td>
+        <td><strong>Verde</strong> &mdash; Puo' aspettare</td>
       </tr>
     </table>
 
     <h3>Come usarla</h3>
     <ul>
       <li>Ogni card mostra: <strong>numero fila</strong>, conteggio sacche, orario prima partenza</li>
-      <li><strong>Tap sulla card</strong>: espande e mostra i giocatori di quella fila con i relativi orari</li>
-      <li><strong>Tap sul cerchio a destra</strong>: segna la fila come "preparata" (check verde). Le file preparate vanno in fondo alla lista</li>
-      <li>In alto: riepilogo con file totali, sacche totali e progresso preparazione</li>
+      <li><strong>Tap sulla card</strong>: espande e mostra i giocatori di quella fila con i relativi orari di partenza</li>
+      <li><strong>Tap sul cerchio a destra</strong>: segna la fila come "preparata" &#x2713;. Le file preparate vanno in fondo alla lista</li>
+      <li>In alto: riepilogo con file totali, sacche totali e avanzamento della preparazione</li>
     </ul>
 
-    <h3>Vantaggi</h3>
+    <h3>Il vantaggio</h3>
     <p>Quando il caddie master apre una fila del deposito, prepara <strong>tutte le sacche di quella fila in una volta sola</strong>,
-    evitando di tornare piu' volte nella stessa fila. L'app gli dice esattamente quante sacche ci sono
+    evitando di tornare piu' volte nella stessa fila. L'app mostra esattamente quante sacche ci sono
     e per quali giocatori.</p>
 
     <p><em>Nota: i giocatori senza fila assegnata non compaiono in questa vista.</em></p>
@@ -348,17 +372,17 @@
     <h3>Lista</h3>
     <ul>
       <li>I giocatori sono <strong>raggruppati per numero di fila</strong> (fila 1, fila 2, ...)</li>
-      <li>Barra di ricerca per trovare un giocatore per nome</li>
+      <li>Barra di ricerca in alto per trovare un giocatore per nome</li>
       <li><strong>Tap sul numero fila</strong> di un giocatore: apre un popup per modificarla</li>
       <li><strong>X</strong> accanto al nome: elimina il singolo giocatore</li>
-      <li>In fondo: bottone <span class="badge badge-red">Elimina tutta l'anagrafica</span> (con doppia conferma)</li>
+      <li>In fondo alla lista: bottone <span class="badge badge-red">Elimina tutta l'anagrafica</span> (con doppia conferma di sicurezza)</li>
     </ul>
 
     <h3>Aggiungi</h3>
-    <p>Inserisci manualmente un giocatore: nome completo (COGNOME NOME) e numero fila.</p>
+    <p>Inserisci manualmente un singolo giocatore: nome completo (COGNOME NOME) e numero fila.</p>
 
     <h3>Importa</h3>
-    <p>Importa molti giocatori in una volta da testo. Formato: una riga per giocatore.</p>
+    <p>Importa molti giocatori in una volta incollando un testo. Formato: una riga per giocatore.</p>
     <pre><code>ROSSI MARIO;5
 BIANCHI LUIGI;12
 VERDI ANNA;3</code></pre>
@@ -368,57 +392,47 @@ VERDI ANNA;3</code></pre>
   <!-- DATI -->
   <div class="section">
     <h2>Gestione dati</h2>
-    <p>Tutti i dati (anagrafica giocatori, gare, configurazione) sono salvati
-    <strong>localmente sul dispositivo</strong> tramite localStorage.</p>
+    <p>Tutti i dati (anagrafica giocatori e gare) sono salvati
+    <strong>localmente sul dispositivo</strong>.</p>
     <ul>
-      <li>Non serve connessione internet</li>
+      <li>Non serve connessione internet per usare l'app</li>
       <li>Non serve un server</li>
-      <li>I dati persistono tra una sessione e l'altra</li>
-      <li>I dati sono legati al dispositivo: se si cancella la cache del browser o si disinstalla l'app, i dati vengono persi</li>
+      <li>I dati rimangono salvati tra una sessione e l'altra</li>
+      <li>I dati sono legati al dispositivo: cancellando la cache del browser o disinstallando l'app, i dati vengono persi</li>
     </ul>
+
+    <h3>Consiglio</h3>
+    <p>Prima della prima gara, importa l'anagrafica completa dei giocatori con i numeri di fila.
+    In questo modo, quando importi una lista partenze, la maggior parte dei giocatori verra'
+    riconosciuta automaticamente e non dovrai assegnare le file manualmente.</p>
   </div>
 
-  <!-- INSTALLAZIONE -->
+  <!-- AGGIORNAMENTI (per sviluppatori) -->
   <div class="section">
-    <h2>Installazione</h2>
+    <h2>Note tecniche</h2>
+    <p>L'app e' realizzata con React e funziona interamente nel browser (nessun backend).
+    I dati sono salvati in localStorage. Il progetto include anche la configurazione Capacitor
+    per generare un APK Android nativo.</p>
 
-    <h3>Android</h3>
-    <ol>
-      <li>Trasferisci il file <code>CaddieMaster.apk</code> sul telefono (via email, Telegram, USB, ecc.)</li>
-      <li>Apri il file APK sul telefono</li>
-      <li>Se richiesto, abilita "Installa da fonti sconosciute" nelle impostazioni</li>
-      <li>Completa l'installazione</li>
-    </ol>
+    <h3>Aggiornamento dell'app</h3>
+    <p>Per pubblicare una nuova versione:</p>
+    <pre><code>cd frontend
+npm run deploy     # compila e pubblica su GitHub Pages</code></pre>
 
-    <h3>iPhone</h3>
-    <p>Per iPhone serve compilare il progetto con Xcode su un Mac con:</p>
-    <ol>
-      <li>Xcode installato (dall'App Store)</li>
-      <li>Un Apple Developer Account (anche gratuito)</li>
-      <li>iPhone collegato via USB</li>
-    </ol>
+    <h3>Generare APK Android</h3>
     <pre><code>cd frontend
 npm run build
 npx cap sync
-npx cap open ios</code></pre>
-    <p>Da Xcode: selezionare il dispositivo e premere Play.</p>
-  </div>
-
-  <!-- AGGIORNAMENTI -->
-  <div class="section">
-    <h2>Aggiornamenti</h2>
-    <p>Per aggiornare l'app dopo una modifica al codice:</p>
-    <pre><code>cd frontend
-npm run build          # ricompila il frontend
-npx cap sync           # sincronizza con i progetti nativi
-
-# Per Android:
 export JAVA_HOME=/opt/homebrew/opt/openjdk@25/libexec/openjdk.jdk/Contents/Home
 export ANDROID_HOME=~/Library/Android/sdk
 cd android && ./gradlew assembleDebug
 
-# L'APK aggiornato si trova in:
-# android/app/build/outputs/apk/debug/app-debug.apk</code></pre>
+# APK in: android/app/build/outputs/apk/debug/app-debug.apk</code></pre>
+
+    <h3>Codice sorgente</h3>
+    <div class="url-box">
+      <a href="https://github.com/Giammi77/caddie_master" target="_blank">https://github.com/Giammi77/caddie_master</a>
+    </div>
   </div>
 
 </div>
