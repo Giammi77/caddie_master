@@ -1,0 +1,13 @@
+node_modules/
+frontend/node_modules/
+frontend/build/
+frontend/android/
+frontend/ios/
+frontend/resources/
+frontend/icons/
+*.apk
+.claude/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
