@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/caddie_master/static/css/main.ab264f5a.css",
+    "main.js": "/caddie_master/static/js/main.18a1157b.js",
+    "index.html": "/caddie_master/index.html",
+    "main.ab264f5a.css.map": "/caddie_master/static/css/main.ab264f5a.css.map",
+    "main.18a1157b.js.map": "/caddie_master/static/js/main.18a1157b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ab264f5a.css",
+    "static/js/main.18a1157b.js"
+  ]
+}
