@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caddie Master - Guida Utente</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background: #f8f9fa;
+  }
+  .header {
+    background: linear-gradient(135deg, #1b2a4a 0%, #0d1b30 100%);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: #c9a84c;
+  }
+  .header p {
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h2 {
+    color: #1a7a3a;
+    font-size: 1.4rem;
+    margin: 30px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #e8f5e9;
+  }
+  h3 {
+    color: #1b2a4a;
+    font-size: 1.1rem;
+    margin: 20px 0 8px;
+  }
+  p, li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  ul, ol {
+    padding-left: 24px;
+    margin-bottom: 16px;
+  }
+  .section {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .badge-green { background: #e8f5e9; color: #2e7d32; }
+  .badge-orange { background: #fff3e0; color: #e65100; }
+  .badge-red { background: #ffebee; color: #c62828; }
+  .badge-blue { background: #e3f2fd; color: #1565c0; }
+  .tab-preview {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0;
+    flex-wrap: wrap;
+  }
+  .tab-preview span {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .tab-active { background: #1a7a3a; color: white; }
+  .tab-inactive { background: #e0e0e0; color: #666; }
+  code {
+    background: #f0f2f5;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: 'SF Mono', Monaco, Consolas, monospace;
+  }
+  pre {
+    background: #f0f2f5;
+    color: #333;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 12px 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    border: 1px solid #ddd;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+  }
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 12px 0;
+  }
+  .flow-number {
+    min-width: 32px;
+    height: 32px;
+    background: #1a7a3a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .flow-content {
+    flex: 1;
+    padding-top: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+  }
+  th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #555;
+  }
+  .tip {
+    background: #e8f5e9;
+    border-left: 4px solid #1a7a3a;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    margin: 16px 0;
+    font-size: 0.9rem;
+  }
+  .tip strong {
+    color: #1a7a3a;
+  }
+  .warning {
+    background: #fff3e0;
+    border-left: 4px solid #e65100;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    margin: 16px 0;
+    font-size: 0.9rem;
+  }
+  .warning strong {
+    color: #e65100;
+  }
+  .file-btn {
+    display: inline-block;
+    padding: 5px 12px;
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #2e7d32;
+    font-weight: 600;
+  }
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #999;
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Caddie Master</h1>
+  <p>Guida utente</p>
+</div>
+
+<div class="container">
+
+  <!-- INTRODUZIONE -->
+  <div class="section">
+    <h2>A cosa serve</h2>
+    <p>
+      Caddie Master ti aiuta a preparare le attrezzature da golf prima di una gara.
+    </p>
+    <p>
+      Il deposito e' organizzato per <strong>file numerate</strong>.
+      Ogni giocatore ha la propria sacca in una fila specifica.
+      Quando ricevi la lista delle partenze di una gara, l'app ti dice:
+    </p>
+    <ul>
+      <li><strong>Quali file aprire</strong> e in che ordine (le piu' urgenti prima)</li>
+      <li><strong>Quante sacche</strong> ci sono in ogni fila</li>
+      <li><strong>Per quali giocatori</strong> e a che ora partono</li>
+    </ul>
+    <p>In questo modo prepari tutte le sacche di una fila in una volta sola,
+    senza dover tornare piu' volte nella stessa fila.</p>
+  </div>
+
+  <!-- PRIMO UTILIZZO -->
+  <div class="section">
+    <h2>Primo utilizzo</h2>
+    <p>La prima volta che usi l'app, segui questi passaggi:</p>
+
+    <div class="flow-step">
+      <div class="flow-number">1</div>
+      <div class="flow-content">
+        <strong>Importa l'anagrafica giocatori</strong><br>
+        Vai nella sezione <strong>Anagrafica</strong> → tab <strong>Importa</strong>.<br>
+        Puoi caricare un file <code>.txt</code> con il pulsante <span class="file-btn">Carica file .txt</span>
+        oppure incollare il testo direttamente. Formato:
+        <pre><code>ROSSI MARIO;5
+BIANCHI LUIGI;12
+VERDI ANNA;3</code></pre>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-number">2</div>
+      <div class="flow-content">
+        <strong>Verifica l'anagrafica</strong><br>
+        Nel tab <strong>Lista</strong> controlla che i giocatori siano raggruppati correttamente per fila.
+        Puoi correggere una fila con un tap sul numero verde.
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-number">3</div>
+      <div class="flow-content">
+        <strong>Sei pronto!</strong><br>
+        D'ora in poi, quando importi una gara, l'app riconoscera' automaticamente
+        i giocatori e le loro file.
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>Consiglio:</strong> Importa l'anagrafica completa prima della prima gara.
+      Piu' giocatori sono in anagrafica, meno lavoro manuale avrai ad ogni gara.
+    </div>
+  </div>
+
+  <!-- LE 4 SEZIONI -->
+  <div class="section">
+    <h2>Le 4 sezioni dell'app</h2>
+    <p>In basso trovi la barra di navigazione con 4 tab:</p>
+    <div class="tab-preview">
+      <span class="tab-active">+ Importa</span>
+      <span class="tab-inactive">&#9200; Gara</span>
+      <span class="tab-inactive">&#9776; File</span>
+      <span class="tab-inactive">&#128100; Anagrafica</span>
+    </div>
+  </div>
+
+  <!-- 1. IMPORTA -->
+  <div class="section">
+    <h2>Importa Gara</h2>
+    <p>Qui importi la lista delle partenze prima di ogni gara.</p>
+
+    <h3>Passo per passo</h3>
+
+    <div class="flow-step">
+      <div class="flow-number">1</div>
+      <div class="flow-content">
+        <strong>Inserisci nome e data della gara</strong>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-number">2</div>
+      <div class="flow-content">
+        <strong>Carica o incolla la lista partenze</strong><br>
+        Usa il pulsante <span class="file-btn">Carica file .txt</span> per selezionare
+        il file esportato dal sito web della federazione.<br>
+        Le righe non conformi (intestazioni, righe vuote) vengono eliminate automaticamente.<br>
+        Se il file contiene il nome della gara e la data nell'intestazione,
+        i campi vengono compilati in automatico.<br><br>
+        In alternativa puoi incollare il testo direttamente nella textarea.
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-number">3</div>
+      <div class="flow-content">
+        <strong>Premi "Analizza"</strong><br>
+        L'app legge il testo e per ogni giocatore mostra:
+        <ul style="margin-top:4px">
+          <li><span class="badge badge-green">Noto</span> → lo conosce gia', fila assegnata automaticamente</li>
+          <li><span class="badge badge-orange">Nuovo</span> → non e' in anagrafica</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-number">4</div>
+      <div class="flow-content">
+        <strong>Per i giocatori nuovi</strong><br>
+        Se conosci la fila, inseriscila nel campo a destra. Se non la conosci, lascia vuoto:
+        il giocatore non apparira' nella preparazione attrezzature.
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-number">5</div>
+      <div class="flow-content">
+        <strong>Premi "Conferma e Salva"</strong><br>
+        La gara e' pronta! I giocatori nuovi a cui hai assegnato una fila
+        vengono salvati in anagrafica per le prossime gare.
+      </div>
+    </div>
+
+    <h3>Gare precedenti</h3>
+    <p>In cima alla pagina trovi le gare gia' importate. Puoi:</p>
+    <ul>
+      <li>Tap su una gara per riaprirla</li>
+      <li>Bottone <span class="badge badge-red">Elimina</span> per cancellarla</li>
+    </ul>
+  </div>
+
+  <!-- 2. GARA -->
+  <div class="section">
+    <h2>Gara</h2>
+    <p>Mostra le partenze della gara, raggruppate per orario.</p>
+    <ul>
+      <li>Ogni gruppo mostra l'orario e il tee di partenza</li>
+      <li>Accanto a ogni giocatore c'e' il <span class="badge badge-green" style="background:#1a7a3a;color:white">numero fila</span></li>
+      <li>I giocatori senza fila mostrano <span class="badge badge-orange">No fila</span></li>
+    </ul>
+
+    <div class="tip">
+      <strong>Tap su un giocatore</strong> per evidenziare in verde tutti i giocatori
+      che hanno la stessa fila nel deposito. Utile per vedere subito chi condivide la stessa fila.
+      Tap di nuovo per deselezionare.
+    </div>
+  </div>
+
+  <!-- 3. FILE -->
+  <div class="section">
+    <h2>File Deposito</h2>
+    <p>Questa e' la <strong>schermata principale per il tuo lavoro</strong>.
+    Ti dice quali file aprire e in che ordine.</p>
+
+    <h3>Come e' ordinata</h3>
+    <p>Le file sono ordinate per <strong>urgenza</strong>: la fila con il giocatore
+    che parte prima appare in cima alla lista.</p>
+
+    <h3>Cosa significano i colori</h3>
+    <table>
+      <tbody><tr>
+        <td><div style="width:40px;height:8px;background:#c62828;border-radius:4px"></div></td>
+        <td><strong>Rosso</strong> — Da preparare subito</td>
+      </tr>
+      <tr>
+        <td><div style="width:40px;height:8px;background:#f9a825;border-radius:4px"></div></td>
+        <td><strong>Giallo</strong> — Priorita' media</td>
+      </tr>
+      <tr>
+        <td><div style="width:40px;height:8px;background:#2e7d32;border-radius:4px"></div></td>
+        <td><strong>Verde</strong> — C'e' ancora tempo</td>
+      </tr>
+    </tbody></table>
+
+    <h3>Come usarla</h3>
+    <ul>
+      <li>Ogni riga mostra il <strong>numero della fila</strong>, quante sacche contiene e l'orario della prima partenza</li>
+      <li><strong>Tap sulla riga</strong>: si espande e mostra i nomi dei giocatori con i loro orari</li>
+      <li><strong>Tap sul cerchio a destra</strong> &#9675; : segna la fila come preparata &#10003;.
+      Le file completate vanno in fondo alla lista</li>
+    </ul>
+
+    <h3>Riepilogo in alto</h3>
+    <p>In cima alla schermata trovi i contatori:</p>
+    <ul>
+      <li><strong>File</strong> — quante file devi aprire in totale</li>
+      <li><strong>Sacche</strong> — quante sacche devi preparare in totale</li>
+      <li><strong>Pronte</strong> — quante file hai gia' completato</li>
+      <li><strong>Sacche OK</strong> — quante sacche sono pronte</li>
+    </ul>
+
+    <div class="tip">
+      <strong>Il vantaggio:</strong> Quando apri una fila del deposito, prepara tutte le sacche
+      di quella fila in una volta sola. L'app ti dice esattamente quante sono e per chi.
+      Cosi' non devi tornare piu' volte nella stessa fila.
+    </div>
+  </div>
+
+  <!-- 4. ANAGRAFICA -->
+  <div class="section">
+    <h2>Anagrafica Giocatori</h2>
+    <p>Qui gestisci l'elenco dei giocatori con il loro numero di fila.</p>
+
+    <h3>Tre tab</h3>
+    <div class="tab-preview">
+      <span class="tab-active">Lista</span>
+      <span class="tab-inactive">Aggiungi</span>
+      <span class="tab-inactive">Importa</span>
+    </div>
+
+    <h3>Lista</h3>
+    <p>I giocatori sono raggruppati per fila (fila 1, fila 2, ...).</p>
+    <ul>
+      <li><strong>Cerca</strong>: usa la barra in alto per trovare un giocatore per nome</li>
+      <li><strong>Modifica fila</strong>: tap sul numero verde accanto al nome</li>
+      <li><strong>Elimina</strong>: tap sulla X accanto al nome</li>
+      <li><strong>Elimina tutto</strong>: bottone rosso in fondo (chiede conferma due volte)</li>
+    </ul>
+
+    <h3>Aggiungi</h3>
+    <p>Per aggiungere un singolo giocatore: scrivi il nome (COGNOME NOME) e il numero della fila.</p>
+
+    <h3>Importa</h3>
+    <p>Per importare molti giocatori insieme. Usa il pulsante <span class="file-btn">Carica file .txt</span>
+    per selezionare un file di testo, oppure incolla direttamente il testo. Formato: una riga per giocatore:</p>
+    <pre><code>ROSSI MARIO;5
+BIANCHI LUIGI;12
+VERDI ANNA;3</code></pre>
+    <p>Puoi usare come separatore: punto e virgola (<code>;</code>), virgola (<code>,</code>) oppure tab.</p>
+  </div>
+
+  <!-- NOTE IMPORTANTI -->
+  <div class="section">
+    <h2>Informazioni utili</h2>
+
+    <div class="tip">
+      <strong>I dati restano sul telefono.</strong>
+      L'anagrafica e le gare vengono salvate direttamente sul tuo dispositivo.
+      Non serve connessione internet per usare l'app.
+    </div>
+
+    <div class="warning">
+      <strong>Attenzione:</strong> Se cancelli i dati del browser o disinstalli l'app,
+      perdi l'anagrafica e le gare salvate. Tieni una copia dell'anagrafica
+      nel file di testo originale come backup.
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Caddie Master v1.1
+</div>
+
+</body></html>
