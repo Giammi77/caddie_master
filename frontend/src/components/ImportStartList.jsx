@@ -2,17 +2,41 @@ import React, { useState, useEffect } from 'react';
 import { parseStartList } from '../parser';
 import {
   getTournaments, createTournament, deleteTournament,
-  analyzeStartList, confirmEntries,
+  getPlayers, confirmEntries,
 } from '../storage';
 
+function extractHeader(text) {
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  let name = '';
+  let date = new Date().toISOString().split('T')[0];
+
+  if (lines.length >= 1 && !lines[0].match(/^\d{1,2}:\d{2}/)) {
+    name = lines[0];
+  }
+  if (lines.length >= 2) {
+    const dateMatch = lines[1].match(/(\d{2})-(\d{2})-(\d{4})/);
+    if (dateMatch) {
+      date = `${dateMatch[3]}-${dateMatch[2]}-${dateMatch[1]}`;
+    }
+  }
+  return { name, date };
+}
+
+function filterValidLines(text) {
+  return text.split('\n').filter(line => {
+    const parts = line.split('\t');
+    return parts.length >= 3 && /^\d{1,2}:\d{2}/.test(parts[0].trim());
+  }).join('\n');
+}
+
 function ImportStartList({ onTournamentReady }) {
-  const [name, setName] = useState('');
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [rawText, setRawText] = useState('');
   const [step, setStep] = useState('input'); // input | review | done
   const [parsedData, setParsedData] = useState(null);
   const [summary, setSummary] = useState(null);
   const [tournament, setTournament] = useState(null);
+  const [reviewName, setReviewName] = useState('');
+  const [reviewDate, setReviewDate] = useState('');
   const [existingTournaments, setExistingTournaments] = useState([]);
 
   useEffect(() => {
@@ -20,10 +44,7 @@ function ImportStartList({ onTournamentReady }) {
   }, []);
 
   const handleAnalyze = () => {
-    if (!name || !rawText) return;
-
-    const tourn = createTournament(name, date);
-    setTournament(tourn);
+    if (!rawText.trim()) return;
 
     const parsed = parseStartList(rawText);
     if (!parsed.length) {
@@ -31,9 +52,28 @@ function ImportStartList({ onTournamentReady }) {
       return;
     }
 
-    const result = analyzeStartList(tourn.id, parsed);
-    setParsedData(result.tee_times);
-    setSummary(result.summary);
+    // Estrai nome e data dall'intestazione
+    const { name, date } = extractHeader(rawText);
+    setReviewName(name);
+    setReviewDate(date);
+
+    // Analisi in memoria: confronta con anagrafica senza creare la gara
+    const players = getPlayers();
+    let known = 0, unknown = 0;
+    const teeTimes = parsed.map(group => ({
+      ...group,
+      players: group.players.map(p => {
+        const existing = players[p.full_name];
+        if (existing) {
+          known++;
+          return { ...p, row_number: existing.row_number, status: 'known' };
+        }
+        unknown++;
+        return { ...p, row_number: null, status: 'unknown' };
+      }),
+    }));
+    setParsedData(teeTimes);
+    setSummary({ total: known + unknown, known, unknown });
     setStep('review');
   };
 
@@ -52,9 +92,11 @@ function ImportStartList({ onTournamentReady }) {
   };
 
   const handleConfirm = () => {
-    confirmEntries(tournament.id, rawText, parsedData);
+    const tourn = createTournament(reviewName || 'Gara', reviewDate);
+    setTournament(tourn);
+    confirmEntries(tourn.id, rawText, parsedData);
     setStep('done');
-    onTournamentReady(tournament);
+    onTournamentReady(tourn);
   };
 
   const handleSelectExisting = (t) => {
@@ -98,6 +140,33 @@ function ImportStartList({ onTournamentReady }) {
           </div>
         </div>
 
+        <div className="card">
+          <div className="form-group">
+            <label>Nome gara</label>
+            <input
+              className="input"
+              value={reviewName}
+              onChange={(e) => setReviewName(e.target.value)}
+              placeholder="Es: Gara Sociale Marzo"
+              style={!reviewName.trim() ? { borderColor: '#e65100' } : {}}
+            />
+            {!reviewName.trim() && (
+              <p style={{ color: '#e65100', fontSize: '0.85rem', marginTop: 4 }}>
+                Inserisci il nome della gara prima di salvare.
+              </p>
+            )}
+          </div>
+          <div className="form-group">
+            <label>Data</label>
+            <input
+              className="input"
+              type="date"
+              value={reviewDate}
+              onChange={(e) => setReviewDate(e.target.value)}
+            />
+          </div>
+        </div>
+
         {parsedData.map((group, teeIdx) => (
           <div key={teeIdx} className="card">
             <div className="tee-time-header">
@@ -129,6 +198,7 @@ function ImportStartList({ onTournamentReady }) {
           <button
             className="btn btn-primary btn-full"
             onClick={handleConfirm}
+            disabled={!reviewName.trim()}
           >
             Conferma e Salva
           </button>
@@ -136,7 +206,6 @@ function ImportStartList({ onTournamentReady }) {
             className="btn btn-secondary btn-full"
             style={{ marginTop: 8 }}
             onClick={() => {
-              deleteTournament(tournament.id);
               setStep('input');
               setParsedData(null);
             }}
@@ -177,24 +246,6 @@ function ImportStartList({ onTournamentReady }) {
       <div className="card">
         <h3>Nuova Gara</h3>
         <div className="form-group">
-          <label>Nome gara</label>
-          <input
-            className="input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Es: Gara Sociale Marzo"
-          />
-        </div>
-        <div className="form-group">
-          <label>Data</label>
-          <input
-            className="input"
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
           <label>Lista partenze</label>
           <label
             style={{
@@ -219,25 +270,7 @@ function ImportStartList({ onTournamentReady }) {
                 if (!file) return;
                 const reader = new FileReader();
                 reader.onload = (ev) => {
-                  const text = ev.target.result;
-                  const allLines = text.split('\n');
-                  // Auto-popola nome e data dall'intestazione del file
-                  const headerLines = allLines.map(l => l.trim()).filter(Boolean);
-                  if (headerLines.length >= 1 && !headerLines[0].match(/^\d{1,2}:\d{2}/)) {
-                    if (!name) setName(headerLines[0]);
-                  }
-                  if (headerLines.length >= 2) {
-                    const dateMatch = headerLines[1].match(/(\d{2})-(\d{2})-(\d{4})/);
-                    if (dateMatch) {
-                      setDate(`${dateMatch[3]}-${dateMatch[2]}-${dateMatch[1]}`);
-                    }
-                  }
-                  // Mantieni solo le righe conformi: iniziano con HH:MM e hanno almeno 3 colonne tab-separate
-                  const validLines = allLines.filter(line => {
-                    const parts = line.split('\t');
-                    return parts.length >= 3 && /^\d{1,2}:\d{2}/.test(parts[0].trim());
-                  });
-                  setRawText(validLines.join('\n'));
+                  setRawText(filterValidLines(ev.target.result));
                 };
                 reader.readAsText(file, 'UTF-8');
                 e.target.value = '';
@@ -254,7 +287,7 @@ function ImportStartList({ onTournamentReady }) {
         <button
           className="btn btn-primary btn-full"
           onClick={handleAnalyze}
-          disabled={!name || !rawText}
+          disabled={!rawText.trim()}
         >
           Analizza
         </button>
