@@ -46,7 +46,7 @@ function App() {
         <h1 className="page-title">{getTitle()}</h1>
         <button
           className="help-btn"
-          onClick={() => window.open('/guida.html', '_blank')}
+          onClick={() => window.open(process.env.PUBLIC_URL + '/guida.html', '_blank')}
           title="Guida utente"
         >
           ?
