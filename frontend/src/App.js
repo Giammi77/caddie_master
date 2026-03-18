@@ -44,6 +44,13 @@ function App() {
     <div className="app">
       <div className="page-header">
         <h1 className="page-title">{getTitle()}</h1>
+        <button
+          className="help-btn"
+          onClick={() => window.open('/guida.html', '_blank')}
+          title="Guida utente"
+        >
+          ?
+        </button>
       </div>
       {renderPage()}
       <NavBar activeTab={activeTab} onTabChange={setActiveTab} />

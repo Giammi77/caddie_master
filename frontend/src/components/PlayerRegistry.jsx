@@ -218,6 +218,36 @@ function PlayerRegistry() {
             Separatori accettati: ; , oppure tab
           </p>
           <div className="form-group">
+            <label
+              style={{
+                display: 'inline-block',
+                padding: '7px 16px',
+                background: '#e8f5e9',
+                border: '1px solid #a5d6a7',
+                borderRadius: 6,
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+                color: '#2e7d32',
+                marginBottom: 8,
+              }}
+            >
+              Carica file .txt
+              <input
+                type="file"
+                accept=".txt,text/plain"
+                style={{ display: 'none' }}
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (!file) return;
+                  const reader = new FileReader();
+                  reader.onload = (ev) => setImportText(ev.target.result);
+                  reader.readAsText(file, 'UTF-8');
+                  e.target.value = '';
+                }}
+              />
+            </label>
+          </div>
+          <div className="form-group">
             <textarea
               className="textarea"
               value={importText}

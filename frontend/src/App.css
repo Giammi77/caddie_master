@@ -20,6 +20,8 @@ body {
 
 /* Header */
 .page-header {
+  display: flex;
+  align-items: center;
   background: linear-gradient(135deg, #1a7a3a 0%, #15632f 100%);
   color: white;
   padding: 14px 16px;
@@ -27,6 +29,20 @@ body {
   top: 0;
   z-index: 10;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.help-btn {
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.6);
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .page-title {

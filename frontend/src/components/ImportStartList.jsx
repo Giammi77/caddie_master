@@ -195,7 +195,55 @@ function ImportStartList({ onTournamentReady }) {
           />
         </div>
         <div className="form-group">
-          <label>Lista partenze (incolla il testo)</label>
+          <label>Lista partenze</label>
+          <label
+            style={{
+              display: 'inline-block',
+              padding: '7px 16px',
+              background: '#e8f5e9',
+              border: '1px solid #a5d6a7',
+              borderRadius: 6,
+              cursor: 'pointer',
+              fontSize: '0.9rem',
+              color: '#2e7d32',
+              marginBottom: 8,
+            }}
+          >
+            Carica file .txt
+            <input
+              type="file"
+              accept=".txt,text/plain"
+              style={{ display: 'none' }}
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                  const text = ev.target.result;
+                  const allLines = text.split('\n');
+                  // Auto-popola nome e data dall'intestazione del file
+                  const headerLines = allLines.map(l => l.trim()).filter(Boolean);
+                  if (headerLines.length >= 1 && !headerLines[0].match(/^\d{1,2}:\d{2}/)) {
+                    if (!name) setName(headerLines[0]);
+                  }
+                  if (headerLines.length >= 2) {
+                    const dateMatch = headerLines[1].match(/(\d{2})-(\d{2})-(\d{4})/);
+                    if (dateMatch) {
+                      setDate(`${dateMatch[3]}-${dateMatch[2]}-${dateMatch[1]}`);
+                    }
+                  }
+                  // Mantieni solo le righe conformi: iniziano con HH:MM e hanno almeno 3 colonne tab-separate
+                  const validLines = allLines.filter(line => {
+                    const parts = line.split('\t');
+                    return parts.length >= 3 && /^\d{1,2}:\d{2}/.test(parts[0].trim());
+                  });
+                  setRawText(validLines.join('\n'));
+                };
+                reader.readAsText(file, 'UTF-8');
+                e.target.value = '';
+              }}
+            />
+          </label>
           <textarea
             className="textarea"
             value={rawText}
