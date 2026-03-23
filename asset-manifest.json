@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/caddie_master/static/css/main.f42a5b9e.css",
-    "main.js": "/caddie_master/static/js/main.40dd1c37.js",
+    "main.js": "/caddie_master/static/js/main.a25e833b.js",
     "index.html": "/caddie_master/index.html",
     "main.f42a5b9e.css.map": "/caddie_master/static/css/main.f42a5b9e.css.map",
-    "main.40dd1c37.js.map": "/caddie_master/static/js/main.40dd1c37.js.map"
+    "main.a25e833b.js.map": "/caddie_master/static/js/main.a25e833b.js.map"
   },
   "entrypoints": [
     "static/css/main.f42a5b9e.css",
-    "static/js/main.40dd1c37.js"
+    "static/js/main.a25e833b.js"
   ]
 }
